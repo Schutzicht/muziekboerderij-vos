@@ -6,9 +6,16 @@ import { Menu, X } from 'lucide-astro';
   <header id="main-header" class="w-full max-w-5xl mx-4 rounded-2xl px-6 py-3 flex justify-between items-center bg-primary-green/40 backdrop-blur-xl border border-white/10 shadow-xl transition-all duration-500">
 
     <!-- Logo -->
-    <a href="/" class="flex items-baseline gap-2 group">
-      <span class="text-sm font-fredoka font-bold text-white/60 group-hover:text-white transition-colors uppercase tracking-widest">Muziekboerderij</span>
-      <span class="text-xl font-fredoka font-bold text-accent-tan uppercase">VOS</span>
+    <a href="/" class="flex items-center gap-3 group">
+      <div class="w-8 h-8 bg-accent-tan/15 border border-accent-tan/30 rounded-xl flex items-center justify-center group-hover:bg-accent-tan/25 transition-colors">
+        <svg class="w-4 h-4 text-accent-tan" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M9 3v10.55A4 4 0 1 0 11 17V7h4V3H9z"/>
+        </svg>
+      </div>
+      <div class="flex flex-col leading-none">
+        <span class="text-[10px] font-montserrat font-medium text-white/40 uppercase tracking-widest">Muziekboerderij</span>
+        <span class="text-base font-fredoka font-bold text-accent-tan uppercase leading-tight">Vos</span>
+      </div>
     </a>
 
     <!-- Desktop Navigation -->
