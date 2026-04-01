@@ -1,0 +1,56 @@
+---
+const reviews = [
+  {
+    name: "Lars van der Berg",
+    band: "The Clockwork Owls",
+    text: "We huren al 3 jaar een loods bij Muziekboerderij Vos. De sfeer is uniek, de apparatuur top en de mensen geweldig. Niet meer weg te denken.",
+    stars: 5,
+    avatar: "L"
+  },
+  {
+    name: "Sanne Meijers",
+    band: "Sanne M. — Solo",
+    text: "De vodatent was perfect voor ons schrijfweekend. Midden in de natuur, maar met alle comfort. 's Avonds langs de loodsen slenteren met een biertje. Magic.",
+    stars: 5,
+    avatar: "S"
+  },
+  {
+    name: "Rick & Fatima",
+    band: "Duo Amber Road",
+    text: "Wij kwamen voor de lessen en bleven voor de camping. Joost en zijn team maken je echt welkom. Aan te raden voor iedereen die muziek serieus neemt.",
+    stars: 5,
+    avatar: "R"
+  }
+];
+---
+
+<section id="ervaringen" class="py-24 md:py-32 bg-beige-warm">
+  <div class="container mx-auto px-6">
+    <div class="max-w-4xl mx-auto text-center mb-20 animate-on-scroll">
+      <p class="text-accent-tan uppercase tracking-widest text-sm font-bold mb-4 font-montserrat">Wat bands zeggen</p>
+      <h2 class="text-4xl md:text-7xl mb-6 text-primary-green">Ervaringen</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      {reviews.map((review, idx) => (
+        <div class={`bg-white p-10 rounded-3xl shadow-sm hover:shadow-xl transition-all animate-on-scroll delay-${idx * 100}`}>
+          <div class="flex gap-1 mb-6">
+            {Array.from({ length: review.stars }).map(() => (
+              <span class="text-accent-tan text-xl">★</span>
+            ))}
+          </div>
+          <p class="text-zinc-500 leading-relaxed font-light mb-8 text-base font-montserrat italic">"{review.text}"</p>
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-primary-green rounded-full flex items-center justify-center text-accent-tan font-bold text-lg font-fredoka shrink-0">
+              {review.avatar}
+            </div>
+            <div>
+              <p class="font-bold text-primary-green text-sm uppercase tracking-wide font-fredoka">{review.name}</p>
+              <p class="text-zinc-400 text-xs font-montserrat">{review.band}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

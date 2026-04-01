@@ -1,0 +1,111 @@
+---
+---
+
+<section id="contact" class="py-24 md:py-32 bg-zinc-950 text-white relative overflow-hidden">
+  <!-- Decorative background circle -->
+  <div class="absolute -top-24 -left-24 w-96 h-96 bg-primary-green/20 rounded-full blur-[120px] pointer-events-none"></div>
+  <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-accent-tan/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+      
+      <!-- Info side -->
+      <div class="space-y-12 animate-on-scroll">
+        <div class="space-y-6">
+          <h2 class="text-4xl md:text-7xl leading-tight">
+            Neem <br/>
+            <span class="text-accent-tan">Contact Op.</span>
+          </h2>
+          <p class="text-white/60 text-xl font-light">
+            Heb je een vraag over onze loodsen, een optreden of wil je direct een Vodatent boeken? Laat het ons weten!
+          </p>
+        </div>
+
+        <div class="space-y-8">
+          <div class="flex items-center gap-6 group">
+            <div class="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-accent-tan group-hover:bg-accent-tan/10 transition-all">
+              <svg class="w-6 h-6 text-accent-tan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </div>
+            <div>
+              <p class="text-accent-tan uppercase text-xs tracking-widest font-bold">Adres</p>
+              <p class="text-lg">Kapoenensluis, Oost-Souburg</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-6 group">
+            <div class="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-accent-tan group-hover:bg-accent-tan/10 transition-all">
+              <svg class="w-6 h-6 text-accent-tan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            </div>
+            <div>
+              <p class="text-accent-tan uppercase text-xs tracking-widest font-bold">Email</p>
+              <p class="text-lg">info@boervos.nl</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Form side -->
+      <div class="bg-white/5 backdrop-blur-xl border border-white/10 p-10 md:p-14 rounded-[3rem] shadow-2xl animate-on-scroll delay-200">
+        <form id="contact-form" class="space-y-6" novalidate>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-2">
+              <label class="text-xs uppercase tracking-widest font-bold text-accent-tan">Naam</label>
+              <input id="field-naam" type="text" placeholder="Jouw naam" required class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-accent-tan transition-all placeholder:text-white/20"/>
+            </div>
+            <div class="space-y-2">
+              <label class="text-xs uppercase tracking-widest font-bold text-accent-tan">Email</label>
+              <input id="field-email" type="email" placeholder="jouw@email.com" required class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-accent-tan transition-all placeholder:text-white/20"/>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <label class="text-xs uppercase tracking-widest font-bold text-accent-tan">Onderwerp</label>
+            <select class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-accent-tan transition-all appearance-none cursor-pointer">
+              <option class="bg-zinc-900">Muziekloods huren</option>
+              <option class="bg-zinc-900">Glamping boeken</option>
+              <option class="bg-zinc-900">Lessen & Workshops</option>
+              <option class="bg-zinc-900">Anders</option>
+            </select>
+          </div>
+
+          <div class="space-y-2">
+            <label class="text-xs uppercase tracking-widest font-bold text-accent-tan">Bericht</label>
+            <textarea id="field-bericht" rows="4" placeholder="Vertel ons meer..." required class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-accent-tan transition-all placeholder:text-white/20"></textarea>
+          </div>
+
+          <div id="form-error" class="hidden text-red-400 text-sm font-montserrat">Vul alle verplichte velden in.</div>
+          <div id="form-success" class="hidden text-green-400 text-sm font-montserrat">Bericht verzonden! We nemen snel contact op.</div>
+
+          <button type="submit" class="w-full bg-accent-tan text-primary-green font-bold py-5 rounded-2xl uppercase tracking-widest hover:bg-white transition-all transform hover:scale-105 shadow-xl">
+            Verzenden
+          </button>
+        </form>
+
+        <script>
+          const form = document.getElementById('contact-form') as HTMLFormElement;
+          const errorMsg = document.getElementById('form-error')!;
+          const successMsg = document.getElementById('form-success')!;
+
+          form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const naam = (document.getElementById('field-naam') as HTMLInputElement).value.trim();
+            const email = (document.getElementById('field-email') as HTMLInputElement).value.trim();
+            const bericht = (document.getElementById('field-bericht') as HTMLTextAreaElement).value.trim();
+
+            if (!naam || !email || !bericht) {
+              errorMsg.classList.remove('hidden');
+              successMsg.classList.add('hidden');
+              return;
+            }
+
+            errorMsg.classList.add('hidden');
+            successMsg.classList.remove('hidden');
+            form.reset();
+          });
+        </script>
+      </div>
+
+    </div>
+  </div>
+</section>

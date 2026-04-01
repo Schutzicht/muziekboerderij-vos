@@ -1,0 +1,53 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Loodsen from '../components/Loodsen.astro';
+import Camping from '../components/Camping.astro';
+import Glamping from '../components/Glamping.astro';
+import Prijzen from '../components/Prijzen.astro';
+import Reviews from '../components/Reviews.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import VolumeKnob from '../components/VolumeKnob.astro';
+---
+
+<Layout title="Muziekboerderij Vos | Muziek Camping & Loodsen Zeeland">
+	<Header />
+	<main>
+		<Hero />
+		<About />
+		<Loodsen />
+		<Camping />
+		<Glamping />
+		<Prijzen />
+		<Reviews />
+		<Contact />
+	</main>
+	<Footer />
+	<VolumeKnob />
+</Layout>
+
+<script>
+	// Simple interaction to add 'visible' class to elements with 'animate-on-scroll'
+	const observerOptions = {
+		root: null,
+		rootMargin: '0px',
+		threshold: 0.1
+	};
+
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach(entry => {
+			if (entry.isIntersecting) {
+				entry.target.classList.add('visible');
+			}
+		});
+	}, observerOptions);
+
+	// Initial setup for elements that should animate on scroll
+	document.querySelectorAll('.animate-on-scroll').forEach(el => {
+		el.classList.add('fade-up');
+		observer.observe(el);
+	});
+</script>

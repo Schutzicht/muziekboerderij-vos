@@ -1,0 +1,78 @@
+---
+import { CheckCircle2 } from 'lucide-astro';
+
+const perks = [
+  "Luxe boxspring bedden",
+  "Eigen keuken & koffiemachine",
+  "Ruime houten veranda",
+  "Gitaar-vriendelijke sfeer",
+];
+---
+
+<section id="vodatenten" class="py-24 md:py-32 bg-beige-warm/30 relative overflow-hidden">
+  <div class="container mx-auto px-6">
+    <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+      
+      <!-- Text side -->
+      <div class="w-full lg:w-1/2 space-y-8 order-2 lg:order-1 animate-on-scroll">
+        <div class="space-y-4">
+          <h2 class="text-4xl md:text-6xl text-primary-green">
+            Verblijf in een <span class="italic font-light">Vodatent</span><br/>
+            <span class="text-accent-tan">Rust in de natuur.</span>
+          </h2>
+          <p class="text-zinc-600 text-xl font-light leading-relaxed">
+            Combineer je repetitie met een verblijf in de natuur. Onze volledig ingerichte Vodatenten bieden de nodige rust en het comfort van thuis, direct bij de studio's.
+          </p>
+        </div>
+
+        <ul class="space-y-4">
+          {perks.map((perk) => (
+            <li class="flex items-center gap-4 text-primary-green font-medium text-lg">
+              <CheckCircle2 class="text-accent-tan" size={24} />
+              {perk}
+            </li>
+          ))}
+        </ul>
+
+        <div class="pt-4">
+          <a href="#contact" class="inline-block bg-primary-green text-white px-10 py-5 rounded-full font-bold text-lg uppercase tracking-widest hover:bg-accent-tan transition-all transform hover:scale-105 shadow-xl">
+            Reserveer jouw tent
+          </a>
+        </div>
+      </div>
+
+      <!-- Image side -->
+      <div class="w-full lg:w-1/2 order-1 lg:order-2 animate-on-scroll">
+        <div class="relative">
+          <!-- Decorative frame -->
+          <div class="absolute -inset-4 border-2 border-accent-tan/30 rounded-[2rem] -z-10 translate-x-4 translate-y-4"></div>
+          
+          <div class="rounded-[2rem] overflow-hidden shadow-2xl aspect-[4/5] md:aspect-square">
+            <img 
+              src="/vodatent.png" 
+              alt="Luxe Vodatent" 
+              class="w-full h-full object-cover"
+            />
+          </div>
+
+          <!-- Floating badge -->
+          <div class="absolute -bottom-8 -right-8 bg-white p-8 rounded-2xl shadow-2xl hidden md:block animate-bounce-slow">
+            <p class="text-primary-green font-fredoka font-bold text-2xl">6 PERSONEN</p>
+            <p class="text-accent-tan text-sm uppercase tracking-tighter">VOLLEDIG INGERICHT</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes bounce-slow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  .animate-bounce-slow {
+    animation: bounce-slow 4s ease-in-out infinite;
+  }
+</style>

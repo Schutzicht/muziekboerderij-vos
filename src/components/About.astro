@@ -1,0 +1,65 @@
+---
+import VinylRecord from './VinylRecord.astro';
+---
+
+<section id="over-ons" class="py-24 md:py-32 bg-off-white overflow-hidden">
+  <div class="container mx-auto px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <!-- Image / Vinyl side -->
+      <div class="relative flex justify-center lg:block animate-on-scroll">
+        <VinylRecord />
+        <!-- Floating notes / accents can be added here -->
+        <div class="absolute -bottom-10 -right-10 w-48 h-48 bg-accent-tan/10 rounded-full blur-3xl -z-10"></div>
+      </div>
+
+      <!-- Text side -->
+      <div class="space-y-8 animate-on-scroll delay-200">
+        <div class="space-y-4">
+          <h2 class="text-4xl md:text-6xl text-primary-green leading-tight">
+            Creatieve <br/>
+            <span class="text-accent-tan">Broedplaats.</span>
+          </h2>
+          <div class="w-24 h-1 bg-accent-tan"></div>
+        </div>
+        
+        <div class="space-y-6 text-zinc-700 text-lg md:text-xl leading-relaxed">
+          <p>
+            Muziekboerderij Vos is al jaren een begrip in de Zeeuwse regio. Met 12 karakteristieke loodsen bieden we een thuisbasis aan ruim 30 bands.
+          </p>
+          <p>
+            Maar we zijn meer dan dat. Van 1-op-1 drumles tot explosieve breakdance-workshops: dit is dé plek waar creativiteit de ruimte krijgt. Geen steriele studio's, maar een plek die écht leeft.
+          </p>
+          <p>
+            Authentiek, sfeervol en inspirerend. Hier vind je de ruimte (en de rust) om helemaal op te gaan in jouw ritme.
+          </p>
+        </div>
+
+        <div class="pt-6">
+          <a href="#contact" class="inline-flex items-center gap-4 text-primary-green font-bold text-lg uppercase tracking-widest group">
+            Neem contact op
+            <span class="w-12 h-1 bg-primary-green group-hover:w-20 transition-all"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const observerOptions = {
+    threshold: 0.2
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.animate-on-scroll').forEach(el => {
+    el.classList.add('fade-up');
+    observer.observe(el);
+  });
+</script>

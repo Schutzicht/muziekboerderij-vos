@@ -1,0 +1,60 @@
+---
+import { Tent } from 'lucide-astro';
+---
+
+<section id="camping" class="py-24 md:py-32 bg-primary-green text-off-white relative overflow-hidden">
+  <div class="container mx-auto px-6">
+    <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+      
+      <!-- Text side -->
+      <div class="w-full lg:w-1/2 space-y-8 animate-on-scroll">
+        <div class="space-y-4">
+          <h2 class="text-4xl md:text-6xl text-off-white">
+            Vrije <br/>
+            <span class="text-accent-tan">Kampeerplaatsen.</span>
+          </h2>
+          <p class="text-white/80 text-xl font-light leading-relaxed">
+            Neem je eigen tent, caravan of camper mee. Onze ruime kampeerplaatsen liggen midden in het groen. Hier mag de gitaar 's avonds gewoon mee naar het kampvuur.
+          </p>
+        </div>
+
+        <ul class="space-y-4 pt-4">
+          <li class="flex items-center gap-4 text-white text-lg font-medium">
+            <div class="w-10 h-10 rounded-full bg-accent-tan/20 flex items-center justify-center text-accent-tan">
+              <Tent size={20} />
+            </div>
+            Ruime, groene staanplaatsen
+          </li>
+          <li class="flex items-center gap-4 text-white text-lg font-medium">
+            <div class="w-10 h-10 rounded-full bg-accent-tan/20 flex items-center justify-center text-accent-tan">
+              <Tent size={20} />
+            </div>
+            Kampvuur & muziek toegestaan
+          </li>
+          <li class="flex items-center gap-4 text-white text-lg font-medium">
+            <div class="w-10 h-10 rounded-full bg-accent-tan/20 flex items-center justify-center text-accent-tan">
+              <Tent size={20} />
+            </div>
+            Schoon sanitair & stroomvoorziening
+          </li>
+        </ul>
+
+      </div>
+
+      <!-- Detail/Image side (using CSS pattern for now instead of just image) -->
+      <div class="w-full lg:w-1/2 animate-on-scroll delay-200">
+        <div class="relative bg-zinc-900 rounded-[2rem] overflow-hidden shadow-2xl aspect-[4/3] md:aspect-video flex items-center justify-center border border-white/10 group">
+          <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Ccircle cx=\'2\' cy=\'2\' r=\'1\' fill=\'%23d4a373\' fill-opacity=\'0.1\'/%3E%3C/svg%3E')]"></div>
+          <div class="z-10 text-center p-8">
+            <div class="w-20 h-20 mx-auto rounded-full bg-accent-tan text-primary-green flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <Tent size={40} />
+            </div>
+            <p class="text-2xl font-fredoka font-bold uppercase tracking-widest text-white">Back to basics</p>
+            <p class="text-accent-tan text-sm mt-2">Kamperen zoals het bedoeld is</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

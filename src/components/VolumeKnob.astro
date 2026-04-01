@@ -1,0 +1,72 @@
+---
+---
+
+<div id="scroll-knob-container" class="fixed bottom-8 right-8 z-50 hidden md:flex flex-col items-center gap-2">
+  <span class="text-[10px] font-bold text-primary-green/40 uppercase tracking-[0.2em] [writing-mode:vertical-rl] mb-2">Volume</span>
+  
+  <div class="relative group">
+    <!-- Glow effect -->
+    <div class="absolute inset-0 bg-accent-tan/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+    
+    <!-- The Knob -->
+    <div id="volume-knob" class="w-16 h-16 bg-zinc-900 rounded-full border-4 border-zinc-800 shadow-2xl relative cursor-pointer group-hover:border-accent-tan transition-colors">
+      <!-- Indicators around the knob -->
+      <div class="absolute inset-[-8px] rounded-full border border-primary-green/10"></div>
+      
+      <!-- The Marker / Pointer -->
+      <div id="knob-marker" class="absolute top-2 left-1/2 -ml-0.5 w-1 h-3 bg-accent-tan rounded-full origin-[bottom_center] transition-transform duration-200"></div>
+      
+      <!-- Center Cap -->
+      <div class="absolute inset-[30%] bg-zinc-800 rounded-full shadow-inner border border-zinc-700"></div>
+    </div>
+
+    <!-- Percentage display -->
+    <div id="knob-percentage" class="absolute -top-10 left-1/2 -translate-x-1/2 bg-primary-green text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none font-bold">
+      0%
+    </div>
+  </div>
+</div>
+
+<script>
+  const knobMarker = document.getElementById('knob-marker');
+  const knobPercentage = document.getElementById('knob-percentage');
+  const knobContainer = document.getElementById('scroll-knob-container');
+
+  function updateKnob() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.body.offsetHeight;
+    const winHeight = window.innerHeight;
+    const scrollPercent = scrollTop / (docHeight - winHeight);
+    
+    // Rotation range: -135deg to 135deg (270 total)
+    const rotation = (scrollPercent * 270) - 135;
+    
+    if (knobMarker) {
+      knobMarker.style.transform = `rotate(${rotation}deg)`;
+    }
+    
+    if (knobPercentage) {
+      knobPercentage.innerText = `${Math.round(scrollPercent * 100)}%`;
+    }
+
+    // Show/hide knob based on scroll (only show after some scrolling)
+    if (scrollTop > 100) {
+      knobContainer?.classList.remove('hidden');
+    } else {
+      knobContainer?.classList.add('hidden');
+    }
+  }
+
+  window.addEventListener('scroll', updateKnob);
+  
+  // Initial run
+  updateKnob();
+</script>
+
+<style>
+  #volume-knob {
+    box-shadow: 
+      0 10px 25px rgba(0,0,0,0.3),
+      inset 0 0 15px rgba(255,255,255,0.05);
+  }
+</style>
