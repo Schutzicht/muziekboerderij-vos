@@ -75,8 +75,9 @@
   let slowTimer: ReturnType<typeof setInterval> | null = null;
   let spinTimer: ReturnType<typeof setInterval> | null = null;
 
-  function playRecordStop() {
+  async function playRecordStop() {
     const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
+    await ctx.resume();
 
     // Scratch noise burst
     const bufferSize = Math.floor(ctx.sampleRate * 0.25);
