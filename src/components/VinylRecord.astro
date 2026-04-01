@@ -75,61 +75,57 @@
   let slowTimer: ReturnType<typeof setInterval> | null = null;
   let spinTimer: ReturnType<typeof setInterval> | null = null;
 
-  async function playRecordStop() {
+  async function playDJScratch() {
     const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
     await ctx.resume();
 
-    // Scratch noise burst
-    const bufferSize = Math.floor(ctx.sampleRate * 0.25);
-    const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-    const noiseData = noiseBuffer.getChannelData(0);
-    for (let i = 0; i < bufferSize; i++) {
-      noiseData[i] = (Math.random() * 2 - 1) * (1 - i / bufferSize);
-    }
-    const noise = ctx.createBufferSource();
-    noise.buffer = noiseBuffer;
+    const now = ctx.currentTime;
 
-    const noiseFilter = ctx.createBiquadFilter();
-    noiseFilter.type = 'bandpass';
-    noiseFilter.frequency.value = 1400;
-    noiseFilter.Q.value = 1.5;
+    // [timeOffset, duration, filterFreqStart, filterFreqEnd, gain]
+    // wik - ke   wik - ke   waaaak - ka
+    const hits: [number, number, number, number, number][] = [
+      [0.00, 0.08, 900,  2400, 0.4],
+      [0.11, 0.08, 2400, 900,  0.4],
+      [0.22, 0.08, 900,  2400, 0.4],
+      [0.33, 0.08, 2400, 900,  0.4],
+      [0.46, 0.20, 700,  2600, 0.5],
+      [0.68, 0.18, 2600, 400,  0.45],
+    ];
 
-    const noiseGain = ctx.createGain();
-    noiseGain.gain.setValueAtTime(0.18, ctx.currentTime);
-    noiseGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
+    hits.forEach(([offset, dur, f1, f2, g]) => {
+      const t = now + offset;
+      const bufLen = Math.ceil(ctx.sampleRate * (dur + 0.06));
+      const buf = ctx.createBuffer(1, bufLen, ctx.sampleRate);
+      const data = buf.getChannelData(0);
+      for (let i = 0; i < bufLen; i++) data[i] = Math.random() * 2 - 1;
 
-    noise.connect(noiseFilter);
-    noiseFilter.connect(noiseGain);
-    noiseGain.connect(ctx.destination);
+      const src = ctx.createBufferSource();
+      src.buffer = buf;
 
-    // Pitch glide down (record decelerating)
-    const osc = ctx.createOscillator();
-    osc.type = 'sawtooth';
-    osc.frequency.setValueAtTime(220, ctx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(18, ctx.currentTime + 0.45);
+      const bp = ctx.createBiquadFilter();
+      bp.type = 'bandpass';
+      bp.frequency.setValueAtTime(f1, t);
+      bp.frequency.linearRampToValueAtTime(f2, t + dur);
+      bp.Q.value = 3;
 
-    const oscFilter = ctx.createBiquadFilter();
-    oscFilter.type = 'lowpass';
-    oscFilter.frequency.value = 600;
+      const gainNode = ctx.createGain();
+      gainNode.gain.setValueAtTime(0, t);
+      gainNode.gain.linearRampToValueAtTime(g, t + 0.012);
+      gainNode.gain.linearRampToValueAtTime(0, t + dur);
 
-    const oscGain = ctx.createGain();
-    oscGain.gain.setValueAtTime(0.22, ctx.currentTime);
-    oscGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.45);
+      src.connect(bp);
+      bp.connect(gainNode);
+      gainNode.connect(ctx.destination);
 
-    osc.connect(oscFilter);
-    oscFilter.connect(oscGain);
-    oscGain.connect(ctx.destination);
-
-    noise.start(ctx.currentTime);
-    noise.stop(ctx.currentTime + 0.3);
-    osc.start(ctx.currentTime);
-    osc.stop(ctx.currentTime + 0.5);
+      src.start(t);
+      src.stop(t + dur + 0.06);
+    });
   }
 
   container?.addEventListener('mouseenter', () => {
     if (spinTimer) { clearInterval(spinTimer); spinTimer = null; }
 
-    playRecordStop();
+    playDJScratch();
 
     const anim = record?.getAnimations()[0];
     if (!anim) return;
