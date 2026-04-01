@@ -3,81 +3,68 @@ const reviews = [
   {
     name: "Lars van der Berg",
     band: "The Clockwork Owls",
-    text: "We huren al 3 jaar een loods bij Muziekboerderij Vos. De sfeer is uniek, de apparatuur top en de mensen geweldig. Niet meer weg te denken.",
-    avatar: "L"
+    text: "We huren al 3 jaar een loods bij Muziekboerderij Vos. De sfeer is uniek, de apparatuur top en de mensen geweldig.",
+    avatar: "L",
+    type: "Band"
   },
   {
     name: "Sanne Meijers",
     band: "Sanne M. — Solo",
-    text: "De vodatent was perfect voor ons schrijfweekend. Midden in de natuur, maar met alle comfort. 's Avonds langs de loodsen slenteren met een biertje. Magic.",
-    avatar: "S"
+    text: "De vodatent was perfect voor ons schrijfweekend. Midden in de natuur, maar met alle comfort. 's Avonds langs de loodsen slenteren. Magic.",
+    avatar: "S",
+    type: "Camping"
   },
   {
     name: "Rick & Fatima",
     band: "Duo Amber Road",
-    text: "Wij kwamen voor de lessen en bleven voor de camping. Joost en zijn team maken je echt welkom. Aan te raden voor iedereen die muziek serieus neemt.",
-    avatar: "R"
+    text: "Wij kwamen voor de lessen en bleven voor de camping. Joost en zijn team maken je echt welkom.",
+    avatar: "R",
+    type: "Band"
+  },
+  {
+    name: "Merel de Vries",
+    band: "Bezoeker",
+    text: "Gewoon een weekend kamperen met muziek om je heen. Zo bijzonder. Je hoeft zelf geen muzikant te zijn om dit te waarderen.",
+    avatar: "M",
+    type: "Camping"
   }
 ];
 ---
 
-<section id="ervaringen" class="py-24 md:py-36 bg-primary-green overflow-hidden">
-  <div class="container mx-auto px-6">
+<section id="ervaringen" class="py-20 md:py-28 bg-primary-green">
+  <div class="container mx-auto px-6 max-w-5xl">
 
-    <!-- Header -->
-    <div class="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-6 animate-on-scroll">
-      <h2 class="text-5xl md:text-8xl text-white leading-none">Wat<br/><span class="text-accent-tan">bands</span><br/>zeggen.</h2>
-      <p class="text-white/40 text-sm font-montserrat font-light max-w-xs md:text-right leading-relaxed">
-        Meer dan 30 vaste bands en honderden muzikanten gingen je voor.
-      </p>
+    <div class="mb-12 animate-on-scroll">
+      <p class="text-accent-tan uppercase tracking-widest text-xs font-bold mb-3 font-montserrat">Ervaringen</p>
+      <h2 class="text-3xl md:text-5xl text-white">Wat mensen zeggen.</h2>
     </div>
 
-    <!-- Reviews layout -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-
-      <!-- Featured review (large) -->
-      <div class="lg:col-span-7 border border-white/10 rounded-3xl p-10 md:p-14 relative animate-on-scroll">
-        <span class="absolute top-8 right-10 text-[8rem] leading-none text-white/5 font-fredoka select-none">"</span>
-        <p class="text-white text-2xl md:text-3xl font-light font-montserrat leading-relaxed mb-12 relative z-10">
-          "{reviews[1].text}"
-        </p>
-        <div class="flex items-center gap-4">
-          <div class="w-11 h-11 rounded-full bg-accent-tan/20 border border-accent-tan/30 flex items-center justify-center text-accent-tan font-bold font-fredoka">
-            {reviews[1].avatar}
-          </div>
-          <div>
-            <p class="text-white text-sm font-fredoka uppercase tracking-wider">{reviews[1].name}</p>
-            <p class="text-white/35 text-xs font-montserrat">{reviews[1].band}</p>
-          </div>
-          <div class="ml-auto flex gap-0.5">
-            {Array.from({ length: 5 }).map(() => <span class="text-accent-tan text-base">★</span>)}
-          </div>
-        </div>
-      </div>
-
-      <!-- Two smaller reviews stacked -->
-      <div class="lg:col-span-5 flex flex-col gap-6">
-        {[reviews[0], reviews[2]].map((review, idx) => (
-          <div class={`flex-1 bg-white/5 rounded-3xl p-8 relative animate-on-scroll delay-${(idx + 1) * 100}`}>
-            <p class="text-white/70 text-base font-montserrat font-light leading-relaxed mb-8">
-              "{review.text}"
-            </p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {reviews.map((review, idx) => (
+        <div class={`border border-white/10 rounded-2xl p-8 animate-on-scroll delay-${idx * 100}`}>
+          <div class="flex items-center justify-between mb-5">
             <div class="flex items-center gap-3">
               <div class="w-9 h-9 rounded-full bg-accent-tan/20 border border-accent-tan/30 flex items-center justify-center text-accent-tan text-sm font-bold font-fredoka shrink-0">
                 {review.avatar}
               </div>
               <div>
-                <p class="text-white/80 text-xs font-fredoka uppercase tracking-wider">{review.name}</p>
-                <p class="text-white/30 text-xs font-montserrat">{review.band}</p>
-              </div>
-              <div class="ml-auto flex gap-0.5">
-                {Array.from({ length: 5 }).map(() => <span class="text-accent-tan text-sm">★</span>)}
+                <p class="text-white text-sm font-fredoka uppercase tracking-wide">{review.name}</p>
+                <p class="text-white/35 text-xs font-montserrat">{review.band}</p>
               </div>
             </div>
+            <span class="text-[10px] uppercase tracking-widest font-montserrat font-bold px-3 py-1 rounded-full border border-white/10 text-white/30">
+              {review.type}
+            </span>
           </div>
-        ))}
-      </div>
-
+          <p class="text-white/60 text-sm font-montserrat font-light leading-relaxed">
+            "{review.text}"
+          </p>
+          <div class="flex gap-0.5 mt-4">
+            {Array.from({ length: 5 }).map(() => <span class="text-accent-tan text-xs">★</span>)}
+          </div>
+        </div>
+      ))}
     </div>
+
   </div>
 </section>
